@@ -53,8 +53,8 @@ module.exports = NodeHelper.create({
 	// @return An array of team data.
 	scrape: function(html) {
 		var teamRows = [];
-		for (var i = 3; i < 19; ++1) {
-			var team = html.split('/n').slice('/n').join('/n');
+		for (var i = 3; i < 19; ++i) {
+			var team = html.split('\n').slice(i,i+1).join('\n');
 			teamRows.push(team);
 		}
 
@@ -71,7 +71,7 @@ module.exports = NodeHelper.create({
 	// The array is then sent to the client (to MMM-AllsvenskanStandings.js).
 	getStandings: function() {
 		request({
-			url: 'http://api.texttv.nu/api/get/343?app=magicmirror',
+			url: 'https://texttv.nu/api/get/343?includePlainTextContent=1',
 			method: 'GET'
 		}, (error, response, body) => {
 			if (!error && response.statusCode == 200) {
